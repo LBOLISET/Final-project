@@ -40,8 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->close();
 
     // Insert user data into database
-    $stmt = $conn->prepare("INSERT INTO lamora_user (firstname, lastname, email, phone, address1, address2, city, state, country, zipcode, dob, username, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssssssssssss", $firstname, $lastname, $email, $phone, $address1, $address2, $city, $state, $country, $zipcode, $dob, $username, $password);
+    $stmt = $conn->prepare("INSERT INTO lamora_user (firstname, lastname, email, phone, address1, address2, city, state, country, zipcode, dob, username, password) VALUES ('$firstname', '$lastname', '$email', '$phone', '$address1', '$address2', '$city', '$state', '$country', '$zipcode', '$dob', '$username', '$password')");
     $stmt->execute();
     $stmt->close();
 
@@ -49,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     header("Location: signup_success.html");
     exit();
 } else {
-    // If the form was not submitted, redirect back to signup page
+    // If the form was no submitted, redirect back to signup page
     header("Location: signup.html");
     exit();
 }
