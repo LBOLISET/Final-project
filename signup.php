@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $zipcode = sanitizeData($_POST['userzipcode']);
     $dob = sanitizeData($_POST['dob']);
     $username = sanitizeData($_POST['username']);
-    $userpassword = sanitizeData($_POST['user_password']);
+    $password = sanitizeData($_POST['password']);
     
     // Check if username already exists
     $check_username_query = "SELECT * FROM lamora_user WHERE username='$username'";
@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     
     // Insert data into users table
-    $query = "INSERT INTO lamora_user (firstname, lastname, email, phone, address1, address2, city, state, country, zipcode, dob, username, user_password) VALUES ('$firstname', '$lastname', '$email', '$phone', '$address1', '$address2', '$city', '$state', '$country', '$zipcode', '$dob', '$username', '$userpassword')";
+    $query = "INSERT INTO lamora_user (firstname, lastname, email, phone, address1, address2, city, state, country, zipcode, dob, username, user_password) VALUES ('$firstname', '$lastname', '$email', '$phone', '$address1', '$address2', '$city', '$state', '$country', '$zipcode', '$dob', '$username', '$password')";
 
     if (mysqli_query($conn, $query)) {
         // Signup successful, redirect to signup success page
@@ -69,6 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
+    // Close the database connection
     mysqli_close($conn);
 }
 ?>
