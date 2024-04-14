@@ -1,25 +1,35 @@
 <?php
-session_start();
 
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    include "db.php";
+// Database connection settings
+include 'db.php';
 
-    $username = $_POST["username"];
-    $password = $_POST["password"];
+// Get form data
+$username = $_POST['username'];
+$password = $_POST['password'];
 
-    // Prepare statement to prevent SQL injection
-    $stmt = $conn->prepare("SELECT * FROM lamora_user WHERE username='$username' AND password='$password'");
-    $stmt->execute();
-    $result = $stmt->get_result();
 
-    if ($result->num_rows > 0) {
-        header( 'Location: booking.html' ) ;
-        }
+// SQL query to fetch manager by username
+$sql = "SELECT * FROM lamora_user WHERE username = '$username'";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $user = $result->fetch_assoc();
+
+    if ($user && $password === $user['user_password']) {
+        // Authentication successful, redirect to dashboard
+        header("Location: booking.html");
+        exit();
     } else {
-        // Invalid login credentials, show error message
-        echo "Invalid username or password.";
+        // Authentication failed, display error message
+        echo "<script>alert('Invalid username or password');</script>";
+        echo "<script>window.location.href = 'user_login.html';</script>";
     }
+} else {
+    // No matching user found, display error message
+    echo "<script>alert('Invalid username or password');</script>";
+    echo "<script>window.location.href = 'user_login.html';</script>";
+}
 
-    $stmt->close();
-    $conn->close();
+$conn->close();
 ?>
