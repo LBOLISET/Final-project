@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $zipcode = sanitizeData($_POST['userzipcode']);
     $dob = sanitizeData($_POST['dob']);
     $username = sanitizeData($_POST['username']);
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash the password
+    $password = sanitizeData($_POST['user_password']); // Store password as plain text
 
     // Check if username already exists
     $stmt = $conn->prepare("SELECT username FROM lamora_user WHERE username = ?");
@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->close();
 
     // Insert user data into database
-    $stmt = $conn->prepare("INSERT INTO lamora_user (firstname, lastname, email, phone, address1, address2, city, state, country, zipcode, dob, username, password) VALUES ('$firstname', '$lastname', '$email', '$phone', '$address1', '$address2', '$city', '$state', '$country', '$zipcode', '$dob', '$username', '$password')");
+    $stmt = $conn->prepare("INSERT INTO lamora_user (firstname, lastname, email, phone, address1, address2, city, state, country, zipcode, dob, username, user_password) VALUES ('$firstname', '$lastname', '$email', '$phone', '$address1', '$address2', '$city', '$state', '$country', '$zipcode', '$dob', '$username', '$password')");
     $stmt->execute();
     $stmt->close();
 
@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     header("Location: signup_success.html");
     exit();
 } else {
-    // If the form was no submitted, redirect back to signup page
+    // If the form was not submitted, redirect back to signup page
     header("Location: signup.html");
     exit();
 }

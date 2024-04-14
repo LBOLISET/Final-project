@@ -6,61 +6,169 @@
     <title>User Login - Lamora Resort</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
+
         .container {
-            max-width: 500px;
-            margin: 20px auto;
-            padding: 20px;
+            width: 800px;
+            padding: 40px;
             background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            position: relative;
         }
+
+        .login-section,
+        .join-now {
+            width: 45%;
+        }
+
+        .vertical-line {
+            position: absolute;
+            left: 50%;
+            top: 40px;
+            bottom: 40px;
+            width: 1px;
+            background-color: #ddd;
+        }
+
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            white-space: nowrap;
+        }
+
         label {
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             font-weight: bold;
+            color: #555;
         }
+
         input[type="text"], input[type="password"] {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin-bottom: 20px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
+            border-radius: 6px;
+            border: 1px solid #ddd;
             box-sizing: border-box;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
         }
+
+        input[type="text"]:focus, input[type="password"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
         input[type="submit"] {
-            padding: 10px 20px;
+            width: 100%;
+            padding: 12px;
             font-size: 16px;
             text-align: center;
-            text-decoration: none;
             color: #fff;
-            background-color: #007bff;
+            background-color: #6C63FF; /* Changed button color */
             border: none;
-            border-radius: 5px;
+            border-radius: 6px;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
+
         input[type="submit"]:hover {
-            background-color: #0056b3;
+            background-color: #524BD4; /* Changed hover color */
+        }
+
+        .forgot-password {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .forgot-password a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password a:hover {
+            color: #0056b3;
+        }
+
+        .join-now {
+            text-align: center;
+        }
+
+        .join-now img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+        }
+
+        .join-now ul {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+
+        .join-now li {
+            margin-bottom: 8px;
+        }
+
+        .join-now button {
+            padding: 12px 24px;
+            font-size: 16px;
+            background-color: #6C63FF; /* Changed button color */
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .join-now button:hover {
+            background-color: #524BD4; /* Changed hover color */
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>User Login</h2>
-        <form action="booking.html" method="POST">
-            <label for="email">Email:</label>
-            <input type="text" id="email" name="email" required>
-
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-
-            <input type="submit" value="Login">
-        </form>
+        <div class="login-section">
+            <h1>Welcome to<br>Lamora Resorts</h1>
+            <h2>Sign in to your account</h2>
+            <form action="login.php" method="POST">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <input type="submit" value="Login">
+                <div class="forgot-password">
+                    <a href="forgot_password.php">Forgot Password?</a>
+                </div>
+            </form>
+        </div>
+        <div class="vertical-line"></div>
+        <div class="join-now">
+            <h2>Join Lamora Resorts</h2>
+            <img src="login_resort.jpg" alt="Resort Image">
+            <ul>
+                <li>Enjoy our lowest rates, all the time</li>
+                <li>Free in-room Wi-Fi</li>
+                <li>Personalized concierge services</li>
+            </ul>
+            <button onclick="window.location.href='signup.html'">JOIN NOW</button>
+        </div>
     </div>
 </body>
 </html>
