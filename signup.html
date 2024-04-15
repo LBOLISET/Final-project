@@ -63,7 +63,7 @@
             <input type="email" id="email" name="email" required>
 
             <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" name="phone" required>
+            <input type="text" id="phone" name="phone" required>
 
             <label for="user_address1">Address line 1:</label>
             <input type="text" id="address1" name="user_address1" required>
@@ -94,6 +94,7 @@
 
             <label for="confirm_password">Confirm Password:</label>
             <input type="password" id="confirm_password" name="confirm_password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Password must match the above and contain at least one number, one uppercase and lowercase letter, and be at least 8 characters long." required>
+            <div id="error_message" class="error-message"></div>
 
             <input type="submit" value="Sign Up">
         </form>
