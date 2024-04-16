@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Maintenance Request</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Room Maintenance Request</h1>
+    <form id="maintenanceForm">
+        <label for="roomNumber">Room Number:</label>
+        <input type="text" id="roomNumber" name="roomNumber" required>
+
+        <label for="maintenanceIssue">Maintenance Issue:</label>
+        <input type="text" id="maintenanceIssue" name="maintenanceIssue" required>
+
+        <label for="maintenanceStatus">Maintenance Status:</label>
+        <select id="maintenanceStatus" name="maintenanceStatus">
+            <option value="open">Open</option>
+            <option value="in-progress">In Progress</option>
+            <option value="closed">Closed</option>
+        </select>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        document.getElementById("maintenanceForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            // Collect form data
+            var formData = new FormData(event.target);
+            var maintenanceData = {};
+            formData.forEach(function(value, key){
+                maintenanceData[key] = value;
+            });
+            
+            // For testing purpose, you can log the data
+            console.log(maintenanceData);
+            
+            // Here you can send the maintenanceData to your backend for further processing
+            // For now, let's just display an alert
+            alert("Maintenance request submitted successfully!");
+            
+            // You can reset the form after submission if needed
+            event.target.reset();
+        });
+    </script>
+</body>
+</html>
