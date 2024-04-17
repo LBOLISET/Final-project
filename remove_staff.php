@@ -29,7 +29,7 @@ if(isset($_GET['action']) && $_GET['action'] === 'remove') {
         }
     } else {
         // If remove_staff_id parameter is not set, display an error message
-        echo "staff ID not provided.";
+        echo "Staff ID not provided.";
     }
 } else {
     // If action parameter is not set or not equal to "remove", display an error message
@@ -39,3 +39,25 @@ if(isset($_GET['action']) && $_GET['action'] === 'remove') {
 // Close the database connection
 mysqli_close($connection);
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Staff Member</title>
+    <script>
+        function confirmDelete() {
+            return confirm("Are you sure you want to delete this staff member?");
+        }
+    </script>
+</head>
+<body>
+    <h2>Delete Staff Member</h2>
+    <form action="remove_staff.php?action=remove" method="post" onsubmit="return confirmDelete();">
+        <label for="remove_staff_id">Staff ID:</label>
+        <input type="text" id="remove_staff_id" name="remove_staff_id" required>
+        <input type="submit" value="Delete">
+    </form>
+</body>
+</html>

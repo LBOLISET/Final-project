@@ -3,11 +3,267 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booking Page - Lamora Resort</title>
+    <title>LAMORA Resorts</title>
+    <style>
+        /* CSS Styles */
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: #007bff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-bar input[type="text"] {
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .user-profile {
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: #0066cc;
+        }
+
+        .resort-details {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .resort-image {
+            flex: 1 1 50%;
+            padding-right: 20px;
+        }
+
+        .resort-image img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .resort-description {
+            flex: 1 1 50%;
+        }
+
+        ul {
+            list-style: none;
+            padding: 10;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .button {
+            background-color: #0066cc;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        footer {
+            background-color: #0066cc;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        footer p {
+            margin: 2;
+        }
+
+        .search-form {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            flex: 0 0 48%;
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #0066cc;
+        }
+
+        .search-form input[type="date"],
+        .search-form select,
+        .search-form input[type="number"] {
+            width: calc(100% - 10px);
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px; 
+        }
+
+        .search-form button {
+            padding: 10px 20px;
+            background-color: #0066cc;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to the Booking Page</h1>
-    <p>This is the booking page of Lamora Resort. Feel free to book your stay with us!</p>
-    <!-- Add more content related to booking here -->
+    <header>
+        <h1>LAMORA Resorts</h1>
+        <div class="search-bar">
+            <input type="text" placeholder="Search...">
+            <div class="user-profile">User Profile</div>
+        </div>
+    </header>
+
+    <main>
+        <section id="resort">
+            <h2>LAMORA Resorts</h2>
+            <div class="resort-description">
+                <p>LAMORA Resorts offer the ultimate getaway with luxurious escapes, family fun, and All-Inclusive getaways.</p>
+                <p><strong>Please note:</strong> Amenities will be included with your selected room type.</p>
+               
+                <form class="search-form" id="search-form">
+                    <div class="form-group">
+                        <label for="room-type">Room Type:</label>
+                        <select name="room-type" id="room-type" onchange="toggleAmenities()">
+                            <option value="">Select Room Type</option>
+                            <option value="Standard">Standard Room</option>
+                            <option value="Deluxe">Deluxe Room</option>
+                            <option value="Suite">Suite</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="amenities-group" style="display: none;">
+                        <label for="amenities">Included Amenities:</label>
+                        <select name="amenities" id="amenities" multiple disabled>
+                            <!-- Amenities options will be dynamically added here -->
+                        </select>
+                    </div>
+                                       
+                    <div class="form-group">
+                        <label for="checkin">Check-in Date:</label>
+                        <input type="date" id="checkin" name="checkin" >
+                    </div>
+                    <div class="form-group">
+                        <label for="checkout">Checkout Date:</label>
+                        <input type="date" id="checkout" name="checkout" >
+                    </div>
+                    <div class="form-group">
+                        <label for="adults">Number of Adults:</label>
+                        <input type="number" id="adults" name="adults" placeholder="Adults" min="1" max="10">
+                    </div>
+                    <div class="form-group">
+                        <label for="children">Number of Children:</label>
+                        <input type="number" id="children" name="children" placeholder="Children" min="0" max="10">
+                    </div>
+                    <button type="submit" class="button">Search</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="search-results">
+            <!-- Results will be displayed here -->
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 LAMORA Resorts. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleAmenities() {
+            var roomType = document.getElementById("room-type").value;
+            var amenitiesGroup = document.getElementById("amenities-group");
+
+            if (roomType === "") {
+                amenitiesGroup.style.display = "none";
+            } else {
+                amenitiesGroup.style.display = "block";
+
+                // Adjust amenities options based on room type
+                var amenitiesSelect = document.getElementById("amenities");
+                amenitiesSelect.options.length = 0; // Clear previous options
+
+                if (roomType === "Standard") {
+                    amenitiesSelect.add(new Option("Swimming Pool", "pool"));
+                    amenitiesSelect.add(new Option("Restaurant", "restaurant"));
+                } else if (roomType === "Deluxe") {
+                    amenitiesSelect.add(new Option("Swimming Pool", "pool"));
+                    amenitiesSelect.add(new Option("Restaurant", "restaurant"));
+                    amenitiesSelect.add(new Option("Gym", "gym"));
+                    amenitiesSelect.add(new Option("Boating", "Boating"));                    
+                } else if (roomType === "Suite") {
+                    amenitiesSelect.add(new Option("Swimming Pool", "pool"));
+                    amenitiesSelect.add(new Option("Restaurant", "restaurant"));
+                    amenitiesSelect.add(new Option("Gym", "gym"));
+                    amenitiesSelect.add(new Option("Spa", "spa"));
+                    amenitiesSelect.add(new Option("Boating", "Boating"));                       
+                }
+            }
+        }
+
+        function searchRooms() {
+            var roomType = document.getElementById("room-type").value;
+            var formData = new FormData();
+            formData.append('room-type', roomType);
+
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("search-results").innerHTML = this.responseText;
+                }
+            };
+            xhr.open("POST", "booking.php", true);
+            xhr.send(formData);
+        }
+
+        document.querySelector(".button").addEventListener("click", function(event) {
+            event.preventDefault();
+            searchRooms();
+        });
+    </script>
 </body>
 </html>

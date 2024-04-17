@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Login - Lamora Resort</title>
+    <style>
+        body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+
+.container {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+}
+
+.button {
+    display: block;
+    width: calc(100% - 40px); /* Adjusted button width */
+    padding: 10px 20px;
+    margin: 0 auto 10px; /* Centered the buttons */
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-manager {
+    background-color: #007bff; /* Light blue color */
+}
+
+.button-staff {
+    background-color: #28a745; /* Light blue color */
+}
+
+.button:hover {
+    background-color: #0056b3; /* Darker blue color on hover */
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Employee Login</h2>
+        <a href="manager_login.html" class="button button-manager">Manager Login</a>
+        <a href="staff_login.html" class="button button-staff">Staff Login</a>
+    </div>
+</body>
+</html>

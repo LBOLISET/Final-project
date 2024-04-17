@@ -1,0 +1,39 @@
+<!-- confirmation.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation Page</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Confirmation Page</h1>
+    </header>
+
+    <main>
+        <section id="confirmation">
+            <h2>Confirmation Details</h2>
+            <div class="room-details">
+                <h3>Room Name</h3>
+                <!-- Include PHP file to fetch and display room details -->
+                <?php include('room_details.php'); ?>
+            </div>
+            <div class="actions">
+                <!-- Book and Back buttons -->
+                <form action="booking selection.php" method="post">
+                    <button type="submit" name="back" class="button">Back</button>
+                </form>
+                <form action="booking confirmation.php" method="post">
+                    <button type="submit" name="book" class="button">Book</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 LAMORA Resorts. All rights reserved.</p>
+    </footer>
+</body>
+</html>

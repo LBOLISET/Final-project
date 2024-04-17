@@ -3,48 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Staff Management - Lamora Resort</title>
+    <title>Manage Staff</title>
     <style>
+        /* Basic styling */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
-            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
 
-        .dashboard-container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 400px;
         }
 
         h1 {
             color: #6C63FF;
-            margin-bottom: 30px;
             text-align: center;
-        }
-
-        .dashboard-section {
-            margin-bottom: 40px;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 20px;
-            display: none; /* Initially hidden */
-        }
-
-        h2 {
-            color: #6C63FF;
-            margin-bottom: 20px;
-            font-size: 24px;
-            border-bottom: 2px solid #6C63FF;
-            padding-bottom: 10px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         label {
@@ -56,8 +40,7 @@
 
         input[type="text"], 
         input[type="number"], 
-        input[type="email"], 
-        input[type="password"] {
+        input[type="date"] {
             width: 100%;
             padding: 10px;
             margin-bottom: 20px;
@@ -69,13 +52,12 @@
 
         input[type="text"]:focus, 
         input[type="number"]:focus, 
-        input[type="email"]:focus, 
-        input[type="password"]:focus {
+        input[type="date"]:focus {
             border-color: #6C63FF;
             outline: none;
         }
 
-        .btn {
+        input[type="submit"] {
             background-color: #6C63FF;
             color: white;
             padding: 12px 20px;
@@ -85,131 +67,22 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
             width: 100%;
-            margin-bottom: 15px; /* Added margin */
         }
 
-        .btn:hover {
+        input[type="submit"]:hover {
             background-color: #524BD4;
         }
-
-        .active {
-            display: block; /* Show the active section */
-        }
     </style>
-    <script>
-        function showSection(sectionId) {
-            // Hide all sections
-            var sections = document.querySelectorAll('.dashboard-section');
-            sections.forEach(function(section) {
-                section.classList.remove('active');
-            });
-
-            // Show the selected section
-            var section = document.getElementById(sectionId);
-            section.classList.add('active');
-        }
-    </script>
 </head>
 <body>
-    <div class="dashboard-container">
+    <div class="container">
         <h1>Staff Management</h1>
-
-        <!-- Buttons -->
-        <button class="btn" onclick="showSection('addstaff')">Add New staff</button>
-        <button class="btn" onclick="showSection('removestaff')">Remove staff</button>
-
-        <!-- Add staff Form -->
-        <div class="dashboard-container" id="removestaff">
-            <h2>Staff Registration</h2>
-            <form action="staff_signup.php" method="POST">
-                <!-- Personal Information -->
-                <label for="firstname">First Name:</label>
-                <input type="text" id="firstname" name="firstname" required>
-    
-                <label for="lastname">Last Name:</label>
-                <input type="text" id="lastname" name="lastname" required>
-    
-                <label for="gender">Gender:</label>
-                <select id="gender" name="gender" required>
-                    <option value="">Select Gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                </select>
-    
-                <label for="dob">Date of Birth:</label>
-                <input type="date" id="dob" name="dob" required>
-    
-                <label for="nationality">Nationality:</label>
-                <input type="text" id="nationality" name="nationality" required>
-    
-                <!-- Contact Information -->
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-    
-                <label for="phone">Phone Number:</label>
-                <input type="text" id="phone" name="phone" required>
-    
-                <label for="address">Address:</label>
-                <textarea id="address" name="address" rows="3" required></textarea>
-    
-                <!-- Employment Details -->
-                <label for="job_title">Job Title/Position:</label>
-                <input type="text" id="job_title" name="job_title" required>
-    
-                <label for="employment_status">Employment Status:</label>
-                <select id="employment_status" name="employment_status" required>
-                    <option value="">Select Status</option>
-                    <option value="full-time">Full-time</option>
-                    <option value="part-time">Part-time</option>
-                    <option value="contract">Contract</option>
-                    <option value="temporary">Temporary</option>
-                </select>
-    
-                <label for="start_date">Start Date:</label>
-                <input type="date" id="start_date" name="start_date" required>
-    
-                <!-- Work Information -->
-                <label for="department">Department:</label>
-                <input type="text" id="department" name="department" required>
-    
-                <label for="supervisor">Supervisor:</label>
-                <input type="text" id="supervisor" name="supervisor" required>
-    
-                <!-- Credentials and Training -->
-                <label for="staff_id">Staff ID:</label>
-                <input type="text" id="staff_id" name="staff_id" pattern="ST\d{3}" title="Staff ID must be in the format STXXX, where X is a digit." required>
-    
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Password must contain at least one number, one uppercase and lowercase letter, and be at least 8 characters long." required>
-    
-                <!-- Emergency Contact -->
-                <label for="emergency_contact_name">Emergency Contact Name:</label>
-                <input type="text" id="emergency_contact_name" name="emergency_contact_name" required>
-    
-                <label for="relationship">Relationship:</label>
-                <input type="text" id="relationship" name="relationship" required>
-    
-                <label for="emergency_contact_phone">Emergency Contact Phone:</label>
-                <input type="text" id="emergency_contact_phone" name="emergency_contact_phone" required>
-    
-                <input type="submit" value="Register">
-            </form>
-        </div>
-
-        <!-- Remove staff Form -->
-        <div class="dashboard-section" id="removestaff">
-            <h2>Remove staff</h2>
-            <form action="remove_staff.php?action=remove" method="post" class="staff-form">
-                <div class="form-group">
-                    <label for="remove_staff_id">staff ID:</label>
-                    <input type="number" id="remove_staff_id" name="remove_staff_id" required>
-                </div>
-
-                <input type="submit" value="Remove staff" class="btn">
-            </form>
-        </div>
-
+        <form action="staff_signup.html" style="margin-bottom: 20px;">
+            <input type="submit" value="Add New Staff Members">
+        </form>
+        <form action="remove_staff.php">
+            <input type="submit" value="Remove Staff Member">
+        </form>
     </div>
 </body>
 </html>

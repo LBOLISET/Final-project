@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAMORA Resorts</title>
+    <style>
+        /* Reset CSS */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        header:hover {
+            background-color: #222;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+        }
+
+        header .search-bar-container {
+            display: flex;
+            align-items: center;
+        }
+
+        header input[type="text"] {
+            padding: 8px;
+            border-radius: 5px;
+            border: none;
+            margin-right: 10px;
+        }
+
+        header .signin-icon {
+            background-color: #000;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        header .signin-icon:hover {
+            background-color: #333;
+        }
+        .signin-icon img {
+        width: 50px; /* Adjust the width as needed */
+        height: auto; /* Maintain aspect ratio */
+    }
+
+
+        /* Navigation styles */
+        nav {
+            background-color: #fff;
+            padding: 15px;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: #000;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #333;
+        }
+
+        /* Main content styles */
+        main {
+            padding: 20px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        main:hover {
+            background-color: #f0f0f0;
+        }
+
+        main h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        main p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #000;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #333;
+        }
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 10px; /* Adjust height as needed */
+            overflow: hidden;
+            border: 10px solid #ccc; /* Optional: Add border for visualization */
+        }
+
+        .image-container img {
+            max-width: 10%;
+            max-height: 10%;
+            width: auto;
+            height: auto;
+            
+        }
+        .responsive-image {
+            width: 100%; /* Ensure the image takes the full width of its container */
+            height: 10%; /* Maintain aspect ratio */
+            display: block; /* Ensure the image is treated as a block element */
+            margin: 0 auto; /* Center the image horizontally */
+        }
+
+        .slider-container {
+            position: relative;
+            max-width: 100%;
+            overflow: hidden;
+        }
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .slider img {
+            width: 100%;
+            height: auto;
+        }
+        .prev-btn, .next-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.5);
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 2;
+        }
+        .prev-btn {
+            left: 10px;
+        }
+        .next-btn {
+            right: 10px;
+        }
+
+        .section {
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+        }
+        .section-heading {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .amenities-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .amenity {
+            flex-basis: calc(50% - 10px);
+            margin-bottom: 20px;
+        }
+        .amenity img {
+            max-width: 50%;
+            height: auto;
+        }
+        .amenity-details {
+            text-align: center;
+        }        
+            
+
+        /* Footer styles */
+        footer {
+            background-color: #000;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        footer:hover {
+            background-color: #222;
+        }
+
+        footer p {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <h1>Welcome to LAMORA Resorts</h1>
+            <p>Escape to luxury</p>
+        </div>
+        <div class="search-bar-container">
+            <button class="signin-icon">
+                <a href="user_login.html">
+                    <img src="signinimage.png" alt="Sign In">
+                </a>
+            </button>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#" onclick="scrollToSection('hero')">Home</a></li>
+            <li><a href="#" onclick="scrollToSection('amenities')">Amenities</a></li>
+            <li><a href="#" onclick="scrollToSection('rooms')">Rooms</a></li>            
+            <li><a href="#" onclick="scrollToSection('Contact Us')">Contact</a></li>
+
+
+        </ul>
+    </nav>
+
+    <main>
+        <!-- Main content section -->
+        <section id="hero">
+            <!-- Image slider -->
+            <div class="slider-container">
+                <div class="slider">
+                    <img src="main1.jpeg" alt="Image 1">
+                    <img src="main2.jpeg" alt="Image 2">
+                    <img src="main3.jpeg" alt="Image 3">
+                    <img src="main4.jpeg" alt="Image 4">
+                    <img src="main5.jpeg" alt="Image 5">
+                </div>
+                <!-- CTA button for sliding -->
+                <button class="prev-btn" onclick="prevSlide()">&#10094;</button>
+                <button class="next-btn" onclick="nextSlide()">&#10095;</button>
+            </div>
+            <!-- Hero content with text -->
+            <div class="hero-content">
+                <h1>Welcome to LAMORA Resorts</h1>
+                <p>Nestled in the heart of Singapore’s bustling Orchard Road, our hotel provides an ideal base for immersing yourself in the city’s premium shopping and entertainment district. We are conveniently located near iconic destinations like Marina Bay Sands, Gardens by the Bay, and Universal Studios Singapore. Delight in our five innovative dining options as you soak up the vibrant pulse of the city.</p>
+                <!-- CTA button -->
+                <a href="user_login.html" class="cta-btn">Book Now</a>
+            </div>
+        </section>
+        <!-- Amenities section -->
+        <section id="amenities" class="section">
+            <h2 class="section-heading">Amenities</h2>
+            <div class="amenities-container">
+                <div class="amenity">
+                    <img src="aminities_swim.jpg" alt="Swimming Pool">
+                    <div class="amenity-details">
+                        <h3>Swimming Pool</h3>
+                        <p>Enjoy a refreshing dip in our luxurious swimming pool, surrounded by lush greenery and breathtaking views.</p>
+                    </div>
+                </div>
+                <div class="amenity">
+                    <img src="aminities_restaurant.jpg" alt="Restaurant">
+                    <div class="amenity-details">
+                        <h3>Restaurant</h3>
+                        <p>Indulge in delectable cuisine at our world-class restaurant, offering a diverse menu of culinary delights.</p>
+                    </div>
+                </div>
+                <div class="amenity">
+                    <img src="aminities_gym.jpg" alt="Gym">
+                    <div class="amenity-details">
+                        <h3>Gym</h3>
+                        <p>Stay fit and energized during your stay with access to our fully-equipped gym, featuring state-of-the-art fitness equipment.</p>
+                    </div>
+                </div>
+                <div class="amenity">
+                    <img src="aminities_spa.jpg" alt="Spa">
+                    <div class="amenity-details">
+                        <h3>Spa</h3>
+                        <p>Relax and rejuvenate your body and mind at our luxurious spa, where skilled therapists offer a range of soothing treatments.</p>
+                    </div>
+                </div>
+                <div class="amenity">
+                    <img src="aminities_boat.jpg" alt="Boating">
+                    <div class="amenity-details">
+                        <h3>Boating</h3>
+                        <p>Experience adventure on the water with our boating excursions, exploring scenic routes and tranquil waterscapes.</p>
+                    </div>
+                </div>
+                <div class="amenity">
+                    <img src="activity_tennis.webp" alt="Tennis Court">
+                    <div class="amenity-details">
+                        <h3>Tennis Court</h3>
+                        <p>Enjoy a game of tennis on our well-maintained courts, perfect for both casual and competitive players.</p>
+                    </div>                
+                </div> 
+                <div class="amenity">
+                    <img src="activites_beachvolleyball.jpg" alt="Beach Volleyball">
+                    <div class="amenity-details">
+                        <h3>Beach Volleyball</h3>
+                        <p>Unwind with a friendly game of beach volleyball on our sandy shores, with stunning ocean views.</p>
+                    </div>
+                </div> 
+                <div class="amenity">
+                    <img src="activities_cycling.jpeg" alt="Cycling">
+                    <div class="amenity-details">
+                        <h3>Cycling</h3>
+                        <p>Explore the scenic surroundings on two wheels with our bicycle rental service, offering routes for all skill levels.</p>
+                    </div>
+                </div>  
+                <div class="amenity">
+                    <img src="activities_yoga.webp" alt="Yoga">
+                    <div class="amenity-details">
+                        <h3>Yoga</h3>
+                        <p>Rejuvenate your body and mind with our daily yoga classes, led by experienced instructors in serene outdoor settings.</p>
+                    </div>
+                </div>  
+                <div class="amenity">
+                    <img src="activities_bonfire.jpeg" alt="Bonfire">
+                    <div class="amenity-details">
+                        <h3>Bonfire Nights</h3>
+                        <p>Gather around the cozy bonfire on cool evenings and enjoy storytelling, music, and roasted marshmallows.</p>
+                    </div>
+                </div> 
+                <div class="amenity">
+                    <img src="activity_smallprivate.jpg" alt="Private Party Small">
+                    <div class="amenity-details">
+                        <h3>Private Party (Small)</h3>
+                        <p>Host an intimate gathering with up to 20 guests at our private party site, ideal for small celebrations and gatherings.</p>
+                    </div>
+                </div>   
+                <div class="amenity">
+                    <img src="activity_kayaking.jpg" alt="Kayaking">
+                    <div class="amenity-details">
+                        <h3>Kayaking</h3>
+                        <p>Embark on a thrilling kayaking adventure and explore the scenic beauty of our surroundings from the water.</p>
+                    </div>
+                </div>                                                                                       
+            </div>
+        </section> 
+        <!-- Rooms section -->
+        <section id="rooms" class="section">
+            <h2 class="section-heading">Rooms</h2>
+            <div class="amenities-container">
+                <!-- Room types -->
+                <div class="amenity">
+                    <img src="standard_room.avif" alt="Standard Room">
+                    <div class="amenity-details">
+                        <h3>Standard Room</h3>
+                        <p>Relax in our cozy standard rooms, equipped with essential amenities including Swimming Pool and Restaurant.</p>
+                    </div>
+                </div>
+                <div class="amenity">
+                    <img src="deluxe rooms.jpeg" alt="Deluxe Room">
+                    <div class="amenity-details">
+                        <h3>Deluxe Room</h3>
+                        <p>Indulge in luxury with our spacious deluxe rooms, featuring extra amenities such as Swimming Pool, Restaurant, Gym, and Boating.</p>
+                    </div>
+                </div>
+                <div class="amenity">
+                    <img src="suite.jpeg" alt="Suite">
+                    <div class="amenity-details">
+                        <h3>Suite</h3>
+                        <p>Experience ultimate luxury in our exquisite suites, featuring lavish amenities including Swimming Pool, Restaurant, Gym, Spa, and Boating.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+                        
+    </main>
+
+    <footer>
+        <p>&copy; 2024 LAMORA Resorts. All rights reserved.</p>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a> | <a href="#">Contact</a></p>
+        <p><a href="employee_login.html">Employee Login</a></p>
+    </footer>
+    <!-- Add your JavaScript link here -->
+    <script src="script.js"></script>
+    <script>
+        let slideIndex = 0;
+
+        function showSlides() {
+            const slides = document.querySelectorAll('.slider img');
+            if (slideIndex >= slides.length) {
+                slideIndex = 0;
+            } else if (slideIndex < 0) {
+                slideIndex = slides.length - 1;
+            }
+            slides.forEach((slide, index) => {
+                if (index === slideIndex) {
+                    slide.style.display = 'block';
+                } else {
+                    slide.style.display = 'none';
+                }
+            });
+        }
+
+        function nextSlide() {
+            slideIndex++;
+            showSlides();
+        }
+
+        function prevSlide() {
+            slideIndex--;
+            showSlides();
+        }
+
+        showSlides();
+
+        function toggleAmenityDetails(amenity) {
+            amenity.classList.toggle('active');
+        }
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }        
+    </script>
+</body>
+</html>
