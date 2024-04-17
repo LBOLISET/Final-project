@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Update the password in the database
-        $sql = "UPDATE lamora_user SET password = '$new_password' WHERE username = '$username'";
+        $sql = "UPDATE lamora_user SET user_password = '$new_password' WHERE username = '$username'";
         
         if (mysqli_query($conn, $sql)) {
             echo "<script>alert('Password updated successfully!');</script>";

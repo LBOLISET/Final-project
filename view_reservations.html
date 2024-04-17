@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Reservations - Lamora Resort</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h1 {
+            color: #6C63FF;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        button {
+            background-color: #6C63FF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #524BD4;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .action-buttons button {
+            margin-left: 10px;
+        }
+
+        .modify-button {
+            background-color: #4CAF50;
+        }
+
+        .modify-button:hover {
+            background-color: #45a049;
+        }
+
+        .cancel-button {
+            background-color: #f44336;
+        }
+
+        .cancel-button:hover {
+            background-color: #da190b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Manage Reservations</h1>
+        
+        <button onclick="fetchReservations()">View Room Reservations</button>
+
+        <div id="reservationsTable" style="display: none;">
+            <h2>All Room Reservations</h2>
+            <table id="reservationTable">
+                <thead>
+                    <tr>
+                        <th>Reservation ID</th>
+                        <th>Username</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Room Type</th>
+                        <th>Check-in Date</th>
+                        <th>Check-out Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Reservation details will be populated here -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Modify Reservation Form (hidden by default) -->
+        <div id="modifyReservation" style="display: none;">
+            <h2>Modify Reservation</h2>
+            <form id="modifyForm">
+                <label for="reservation_id">Reservation ID:</label>
+                <input type="text" id="reservation_id" name="reservation_id" required>
+                
+                <label for="check_in_date">Check-in Date:</label>
+                <input type="date" id="check_in_date" name="check_in_date" required>
+                
+                <label for="check_out_date">Check-out Date:</label>
+                <input type="date" id="check_out_date" name="check_out_date" required>
+
+                <button type="button" class="modify-button" onclick="updateReservation()">Modify Reservation</button>
+            </form>
+        </div>
+
+        <!-- Cancel Reservation Form (hidden by default) -->
+        <div id="cancelReservation" style="display: none;">
+            <h2>Cancel Reservation</h2>
+            <form id="cancelForm">
+                <label for="reservation_id">Reservation ID:</label>
+                <input type="text" id="reservation_id" name="reservation_id" required>
+
+                <button type="button" class="cancel-button" onclick="deleteReservation()">Cancel Reservation</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function fetchReservations() {
+            // Fetch room reservations using fetch API
+            fetch('fetch_reservations.php')
+                .then(response => response.json())
+                .then(data => {
+                    const reservationTable = document.getElementById('reservationTable');
+                    const tbody = reservationTable.querySelector('tbody');
+
+                    // Clear existing rows
+                    tbody.innerHTML = '';
+
+                    // Populate table with fetched data
+                    data.forEach(reservation => {
+                        const row = `
+                            <tr>
+                                <td>${reservation.reservation_id}</td>
+                                <td>${reservation.username}</td>
+                                <td>${reservation.first_name}</td>
+                                <td>${reservation.last_name}</td>
+                                <td>${reservation.room_type}</td>
+                                <td>${reservation.check_in_date}</td>
+                                <td>${reservation.check_out_date}</td>
+                                <td class="action-buttons">
+                                    <button class="modify-button" onclick="modifyReservation(${reservation.reservation_id}, '${reservation.check_in_date}', '${reservation.check_out_date}')">Modify Reservation</button>
+                                    <button class="cancel-button" onclick="deleteReservation(${reservation.reservation_id})">Cancel Reservation</button>
+                                </td>
+                            </tr>
+                        `;
+                        tbody.innerHTML += row;
+                    });
+
+                    // Display the table
+                    document.getElementById('reservationsTable').style.display = 'block';
+                    document.getElementById('modifyReservation').style.display = 'none';
+                    document.getElementById('cancelReservation').style.display = 'none';
+                })
+                .catch(error => {
+                    console.error('Error fetching reservations:', error);
+                });
+        }
+
+        function updateReservation() {
+            const form = document.getElementById('modifyForm');
+            const formData = new FormData(form);
+
+            fetch('modify_reservations.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(result => {
+                alert(result);
+                fetchReservations();  // Refresh reservations table
+            })
+            .catch(error => {
+                console.error('Error updating reservation:', error);
+            });
+        }
+
+        function deleteReservation(reservationId) {
+            const isConfirmed = confirm("Are you sure you want to cancel the reservation?");
+
+            if (isConfirmed) {
+                const formData = new FormData();
+                formData.append('reservation_id', reservationId);
+
+                fetch('cancel_reservations.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.text())
+                .then(result => {
+                    alert(result);
+                    fetchReservations();
+                })
+                .catch(error => {
+                    console.error('Error canceling reservation:', error);
+                });
+            }
+        }
+
+        function modifyReservation(reservationId, checkInDate, checkOutDate) {
+            // Pre-fill the modify form with the selected reservation details
+            document.getElementById('reservation_id').value = reservationId;
+            document.getElementById('check_in_date').value = checkInDate;
+            document.getElementById('check_out_date').value = checkOutDate;
+
+            // Hide other tabs and display modify reservation form
+            document.getElementById('reservationsTable').style.display = 'none';
+            document.getElementById('modifyReservation').style.display = 'block';
+            document.getElementById('cancelReservation').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
