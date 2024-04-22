@@ -40,16 +40,28 @@ if(isset($_POST['room-type']) && !empty($_POST['room-type'])) {
 <!-- Display available rooms -->
 <?php if(isset($availableRooms) && !empty($availableRooms)): ?>
     <h2>Available Rooms</h2>
-    <ul>
-        <?php foreach($availableRooms as $room): ?>
-            <li>
-                <?php echo $room['RoomNumber']; ?> - 
-                <?php echo $room['RoomSize']; ?> sq.ft - 
-                <?php echo $room['Price']; ?>$ per night - 
-                Available from: <?php echo $room['AvailableFrom']; ?> to <?php echo $room['AvailableTo']; ?>
-            </li>
-        <?php endforeach; ?>
-    </ul>
+    <table>
+        <thead>
+            <tr>
+                <th>Room Number</th>
+                <th>Room Size</th>
+                <th>Price</th>
+                <th>Available From</th>
+                <th>Available To</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach($availableRooms as $room): ?>
+                <tr>
+                    <td><?php echo $room['RoomNumber']; ?></td>
+                    <td><?php echo $room['RoomSize']; ?> sq.ft</td>
+                    <td><?php echo $room['Price']; ?>$ per night</td>
+                    <td><?php echo $room['AvailableFrom']; ?></td>
+                    <td><?php echo $room['AvailableTo']; ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
 <?php else: ?>
     <p>No rooms available for the selected room type.</p>
 <?php endif; ?>

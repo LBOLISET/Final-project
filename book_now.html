@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation Page</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script>
+        function confirmBooking() {
+            // Ask for confirmation using a JavaScript popup
+            if (confirm("Are you sure you want to book this room?")) {
+                // User confirmed booking
+
+                // Simulate successful booking (replace with actual booking logic)
+                alert("Booking Successful! You will be redirected to the homepage.");
+
+                // Redirect to homepage
+                window.location.href = "newhtmllandingpage.html"; // Replace with your actual homepage URL
+            } else {
+                // User canceled booking
+                alert("Booking cancelled.");
+            }
+        }
+
+        // Function to fetch and display room details
+        function fetchRoomDetails() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        // If request is successful, update the room details section
+                        document.getElementById('room-details').innerHTML = xhr.responseText;
+                    } else {
+                        // If request fails, display an error message
+                        document.getElementById('room-details').innerHTML = '<p>Error fetching room details.</p>';
+                    }
+                }
+            };
+            // Send a POST request to bookingconfirmation.php with room_number parameter
+            xhr.open('POST', 'book_now.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.send('room_number=<?php echo isset($_POST["room_number"]) ? $_POST["room_number"] : ""; ?>');
+        }
+
+        // Call fetchRoomDetails function when the page loads
+        window.onload = function() {
+            fetchRoomDetails();
+        };
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Confirmation Page</h1>
+    </header>
+
+    <main>
+        <section id="confirmation">
+            <h2>Confirmation Details</h2>
+            <div id="room-details" class="room-details">
+                <!-- Room details will be displayed here dynamically -->
+            </div>
+            <div class="actions">
+                <form action="booking.html" method="post">
+                    <button type="submit" name="back" class="button">Back</button>
+                </form>
+                <button type="button" onclick="confirmBooking()" class="button">Book</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 LAMORA Resorts. All rights reserved.</p>
+    </footer>
+</body>
+</html>

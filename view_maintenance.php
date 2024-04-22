@@ -56,10 +56,10 @@
 include 'db.php';
 
 // Query to fetch all maintenance records
-$sql = "SELECT * FROM maintenance_records";
+$sql = "SELECT * FROM maintenance";
 
 // Execute the query
-$result = mysqli_query($connection, $sql);
+$result = mysqli_query($conn, $sql);
 
 // Check if records exist
 if (mysqli_num_rows($result) > 0) {
@@ -70,7 +70,6 @@ if (mysqli_num_rows($result) > 0) {
         echo "<p><strong>Room Number:</strong> " . $row["room_number"] . "</p>";
         echo "<p><strong>Maintenance Issue:</strong> " . $row["maintenance_issue"] . "</p>";
         echo "<p><strong>Maintenance Status:</strong> " . $row["maintenance_status"] . "</p>";
-        echo "<a href='close_request.php?request_id=" . $row["request_id"] . "' class='close-button'>Close Request</a>";
         echo "</div>";
     }
 } else {
@@ -78,7 +77,7 @@ if (mysqli_num_rows($result) > 0) {
 }
 
 // Close the database connection
-mysqli_close($connection);
+mysqli_close($conn);
 ?>
 
     </div>

@@ -78,7 +78,16 @@
         .signin-icon img {
         width: 50px; /* Adjust the width as needed */
         height: auto; /* Maintain aspect ratio */
-    }
+        }
+        /* Style for the Signup/Login text */
+        .signin-icon span {
+        display: block;
+        font-size: 0.8rem;
+        margin-top: 5px;
+        color: white; /* Change the text color to white */
+        }
+
+
 
 
         /* Navigation styles */
@@ -227,6 +236,24 @@
             text-align: center;
         }        
             
+                /* Modify the button styles */
+        .cta-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #000;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .cta-btn:hover {
+            background-color: #333;
+        }
+
 
         /* Footer styles */
         footer {
@@ -267,6 +294,7 @@
             <button class="signin-icon">
                 <a href="user_login.html">
                     <img src="signinimage.png" alt="Sign In">
+                    <span>SignUp or Login</span>
                 </a>
             </button>
         </div>
@@ -278,8 +306,6 @@
             <li><a href="#" onclick="scrollToSection('amenities')">Amenities</a></li>
             <li><a href="#" onclick="scrollToSection('rooms')">Rooms</a></li>            
             <li><a href="#" onclick="scrollToSection('Contact Us')">Contact</a></li>
-
-
         </ul>
     </nav>
 
@@ -304,7 +330,7 @@
                 <h1>Welcome to LAMORA Resorts</h1>
                 <p>Nestled in the heart of Singapore’s bustling Orchard Road, our hotel provides an ideal base for immersing yourself in the city’s premium shopping and entertainment district. We are conveniently located near iconic destinations like Marina Bay Sands, Gardens by the Bay, and Universal Studios Singapore. Delight in our five innovative dining options as you soak up the vibrant pulse of the city.</p>
                 <!-- CTA button -->
-                <a href="user_login.html" class="cta-btn">Book Now</a>
+                <button class="cta-btn"><a href="user_login.html" class="cta-btn">Book Now</a></button>
             </div>
         </section>
         <!-- Amenities section -->

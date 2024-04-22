@@ -6,7 +6,6 @@
     <title>LAMORA Resorts</title>
     <style>
         /* CSS Styles */
-
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -57,32 +56,24 @@
             color: #0066cc;
         }
 
-        .resort-details {
-            display: flex;
-            flex-wrap: wrap;
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-top: 20px;
         }
 
-        .resort-image {
-            flex: 1 1 50%;
-            padding-right: 20px;
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
         }
 
-        .resort-image img {
-            width: 100%;
-            border-radius: 10px;
+        th {
+            background-color: #f2f2f2;
         }
 
-        .resort-description {
-            flex: 1 1 50%;
-        }
-
-        ul {
-            list-style: none;
-            padding: 10;
-        }
-
-        li {
-            margin-bottom: 10px;
+        tr:hover {
+            background-color: #f5f5f5;
         }
 
         .button {
@@ -148,15 +139,28 @@
             cursor: pointer;
             margin-top: 10px;
         }
+
+        .book-now-button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .book-now-button:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
     <header>
         <h1>LAMORA Resorts</h1>
-        <div class="search-bar">
-            <input type="text" placeholder="Search...">
-            <div class="user-profile">User Profile</div>
-        </div>
     </header>
 
     <main>
@@ -254,10 +258,22 @@
             xhr.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
                     document.getElementById("search-results").innerHTML = this.responseText;
+                    addBookNowButton(); // Call function to add "Book Now" buttons
                 }
             };
             xhr.open("POST", "booking.php", true);
             xhr.send(formData);
+        }
+
+        function addBookNowButton() {
+            var rows = document.querySelectorAll("#search-results table tr");
+            rows.forEach(function(row) {
+                var buttonCell = row.insertCell(-1); // Insert a new cell at the end of each row
+                var button = document.createElement("button");
+                button.textContent = "Book Now";
+                button.classList.add("book-now-button");
+                buttonCell.appendChild(button);
+            });
         }
 
         document.querySelector(".button").addEventListener("click", function(event) {
